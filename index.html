@@ -491,7 +491,7 @@
     .segment[aria-pressed="true"]{background:var(--platinum);color:var(--bg)}
     .evidence-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font:500 9px/1.35 "IBM Plex Mono",monospace}
     .what-check-btn{min-height:28px;padding:0 8px;border:1px solid var(--line-strong);border-radius:7px;background:var(--sunken);color:var(--accent);font:700 9px/1 "Inter",sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-    .rating-block{min-width:0;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:4px 9px;padding:9px 10px;border:1px solid color-mix(in srgb,var(--market-accent) 32%,var(--line));border-radius:11px;background:rgba(6,13,26,.54)}
+    .rating-block{display:none!important}
     .rating-block>strong{grid-row:1/3;color:var(--platinum);font:600 31px/.92 "Space Grotesk",sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.05em}
     .rating-track{height:3px;border-radius:999px;background:color-mix(in srgb,var(--market-accent) 24%,var(--sunken));box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
     .rating-track i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:var(--market-accent)}
@@ -2654,7 +2654,7 @@
   });});
   var methodologyDisclosure=document.getElementById('methodologyDisclosure');
   function openMethodology(){methodologyDisclosure.hidden=false;methodologyDisclosure.scrollIntoView({block:'nearest'});document.getElementById('closeMethodology').focus({preventScroll:true});}
-  document.querySelectorAll('[data-methodology-trigger]').forEach(function(button){button.addEventListener('click',function(event){event.stopPropagation();openMethodology();});});
+  document.addEventListener('click',function(event){var trigger=event.target.closest('[data-methodology-trigger]');if(trigger){event.stopPropagation();openMethodology();}}); // Use event delegation for dynamically-added firm card buttons
   document.getElementById('closeMethodology').addEventListener('click',function(){methodologyDisclosure.hidden=true;document.getElementById('matcherMethodology').scrollIntoView({block:'nearest'});});
   document.querySelectorAll('[data-consent-choice]').forEach(function(button){button.addEventListener('click',function(){document.getElementById('consentBanner').hidden=true;});});
   document.querySelectorAll('[data-matcher-view]').forEach(function(button){button.addEventListener('click',function(){
